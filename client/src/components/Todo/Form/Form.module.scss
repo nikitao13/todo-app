@@ -1,0 +1,48 @@
+.form {
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+
+  input {
+    all: unset;
+    padding: 0.25rem 0.5rem;
+    width: 40%;
+    border-radius: 0.25rem;
+    outline: none;
+    background-color: #161618;
+    border: 1px solid rgba(219, 219, 219, 0.8);
+    user-select: none;
+  }
+
+  select {
+    border-radius: 0.25rem;
+    padding: 0 0.25rem;
+    outline: none;
+    background-color: #161618;
+    color: white;
+    border: 1px solid rgba(219, 219, 219, 0.8);
+    user-select: none;
+  }
+
+  button {
+    all: unset;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #161618;
+    border: 1px solid rgba(219, 219, 219, 0.8);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .error {
+    color: red;
+    align-self: center;
+    background-color: black;
+    padding: 0.3rem 0.2rem;
+    height: 100%;
+    border-radius: 0.25rem;
+    font-size: 12px;
+    opacity: 0.9;
+  }
+}

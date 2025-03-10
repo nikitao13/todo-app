@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  gap: 0.25rem;
+  align-items: stretch;
+  height: 1.5rem;
+
+  input {
+    height: 100%;
+    width: 0.95rem;
+  }
+
+  p {
+    margin: 0;
+    align-self: center;
+  }
+
+  button {
+    all: unset;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #161618;
+    border: 1px solid rgba(219, 219, 219, 0.8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    letter-spacing: normal;
+    font-size: 0.75rem;
+    user-select: none;
+  }
+
+  .delete {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      color: red;
+    }
+  }
+
+  .edit {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      color: #3DC6F1;
+    }
+  }
+
+  .categoryLabel {
+    all: unset;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #161618;
+    border: 1px solid rgba(219, 219, 219, 0.8);
+    display: flex;
+    align-items: center;
+    letter-spacing: normal;
+    font-size: 0.75rem;
+    transition: color 0.2s ease-in-out;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    color: #3DC6F1;
+    user-select: none;
+  }
+}
