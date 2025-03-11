@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import spring.todo.Category.Category;
 
+// Represents the Task entity and maps to the "tasks" database table
+// Each Task belongs to one Category (many-to-one)
+
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -12,8 +15,10 @@ public class Task {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long taskId;
-
+  
+  @Column(unique = true)
   private String taskName;
+
   private Boolean completed;
 
   @ManyToOne

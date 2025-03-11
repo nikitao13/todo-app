@@ -1,6 +1,5 @@
 import { Task } from '../types/types';
-
-const url = import.meta.env.VITE_API_URL;
+import { endpoint } from './endpoint';
 
 interface UpdateTaskParams {
   taskId: number;
@@ -21,7 +20,7 @@ export const updateTask = async ({
     categoryId,
   };
 
-  const response = await fetch(`${url}/tasks/${taskId}`, {
+  const response = await fetch(`${endpoint}/tasks/${taskId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),

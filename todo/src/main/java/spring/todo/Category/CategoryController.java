@@ -18,13 +18,18 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+    @GetMapping("/{id}")
+    public Category getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
+    }
+
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
     }
 
-    @GetMapping("/{id}")
-    public Category getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id);
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
     }
 }

@@ -1,10 +1,9 @@
 import { Category } from '../types/types';
-
-const url = import.meta.env.VITE_API_URL;
+import { endpoint } from './endpoint';
 
 export const createCategory = async (name: string): Promise<Category> => {
   try {
-    const response = await fetch(`${url}/categories`, {
+    const response = await fetch(`${endpoint}/categories`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),

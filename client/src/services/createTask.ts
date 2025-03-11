@@ -1,4 +1,4 @@
-const url = import.meta.env.VITE_API_URL;
+import { endpoint } from './endpoint';
 
 interface CreateTaskParams {
   taskName: string;
@@ -8,7 +8,7 @@ interface CreateTaskParams {
 
 export const createTask = async (task: CreateTaskParams) => {
   try {
-    const response = await fetch(`${url}/tasks`, {
+    const response = await fetch(`${endpoint}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task),

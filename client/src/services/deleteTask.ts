@@ -1,8 +1,8 @@
-const url = import.meta.env.VITE_API_URL;
+import { endpoint } from './endpoint';
 
 export const deleteTask = async (taskId: number): Promise<void> => {
   try {
-    const response = await fetch(`${url}/tasks/${taskId}`, {
+    const response = await fetch(`${endpoint}/tasks/${taskId}`, {
       method: 'DELETE',
     });
 

@@ -1,10 +1,9 @@
 import { Category } from '../types/types';
-
-const url = import.meta.env.VITE_API_URL;
+import { endpoint } from './endpoint';
 
 export const fetchCategories = async (): Promise<Category[]> => {
   try {
-    const response = await fetch(`${url}/categories`);
+    const response = await fetch(`${endpoint}/categories`);
 
     if (!response.ok) throw new Error('Failed to fetch categories');
 
