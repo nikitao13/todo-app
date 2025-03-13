@@ -4,6 +4,7 @@ interface CreateTaskParams {
   taskName: string;
   completed: boolean;
   categoryId: number;
+  priority: string;
 }
 
 export const createTask = async (task: CreateTaskParams) => {

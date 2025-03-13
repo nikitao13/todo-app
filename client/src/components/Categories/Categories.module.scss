@@ -9,7 +9,7 @@
   gap: 0.5rem;
   flex-wrap: wrap;
   width: 50%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .container {
@@ -27,6 +27,7 @@
   border: 0.5px solid rgba(219, 219, 219, 0.8);
   padding: 0.25rem 0.5rem;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     opacity: 0.9;
@@ -40,5 +41,21 @@
     margin: 0;
     color: #ff0000;
     transition: color 0.2s ease-in-out;
+  }
+}
+
+.categoryHeader {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #3dc6f1;
   }
 }

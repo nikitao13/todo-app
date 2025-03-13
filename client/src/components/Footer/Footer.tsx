@@ -5,7 +5,14 @@ const Footer = () => {
   return (
     <div className={classes.container}>
       <p>made by nikita o'keeffe</p>
-      <BsGithub className={classes.icon} />
+      <a
+        href="https://github.com/nikitao13"
+        className={classes.github}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <BsGithub className={classes.icon} />
+      </a>
     </div>
   );
 };

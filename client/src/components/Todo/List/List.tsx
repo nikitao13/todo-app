@@ -9,12 +9,16 @@ interface ListProps {
   tasks: Task[];
   categories: Category[];
   toggleTaskCompleted: (taskId: number) => void;
-  addTask: (taskName: string, categoryId: number) => Promise<void>;
+  addTask: (
+    taskName: string,
+    categoryId: number,
+    priority: string
+  ) => Promise<void>;
   handleDeleteTask: (taskId: number) => void;
   selectedCategory: string;
 }
 
-const filterTasks = (tasks: Task[], selectedCategory: string) => {
+const filterTasksByCategory = (tasks: Task[], selectedCategory: string) => {
   if (selectedCategory === 'all') return tasks;
   return tasks.filter((task) => task.category.name === selectedCategory);
 };
@@ -28,7 +32,7 @@ const List = ({
   selectedCategory,
 }: ListProps) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const filteredTasks = filterTasks(tasks, selectedCategory);
+  const filteredTasks = filterTasksByCategory(tasks, selectedCategory);
 
   return (
     <div className={classes.container}>
@@ -37,11 +41,17 @@ const List = ({
         <FaPlus
           className={classes.icon}
           onClick={() => setIsFormVisible((prev) => !prev)}
-          size={14}
+          size={12}
         />
       </div>
 
-      {isFormVisible && <Form categories={categories} addTask={addTask} />}
+      {isFormVisible && (
+        <Form
+          categories={categories}
+          addTask={addTask}
+          setIsFormVisible={setIsFormVisible}
+        />
+      )}
 
       {selectedCategory !== 'all' && (
         <p className={classes.categoryTitle}>{selectedCategory} tasks</p>
@@ -55,7 +65,21 @@ const List = ({
         )}
         {filteredTasks
           .slice()
-          .reverse()
+          .sort((a, b) => {
+            const priorityOrder: Record<string, number> = {
+              HIGH: 1,
+              MEDIUM: 2,
+              LOW: 3,
+            };
+
+            const priorityComparison =
+              priorityOrder[a.priority] - priorityOrder[b.priority];
+            if (priorityComparison !== 0) return priorityComparison;
+
+            if (a.completed !== b.completed) return a.completed ? -1 : 1;
+
+            return b.taskId - a.taskId;
+          })
           .map((task) => (
             <Item
               key={task.taskId}

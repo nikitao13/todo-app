@@ -7,9 +7,10 @@ interface FormData {
 
 interface FormProps {
   onAddCategory: (newCategory: string) => void;
+  setIsFormVisible?: (isVisible: boolean) => void;
 }
 
-const Form = ({ onAddCategory }: FormProps) => {
+const Form = ({ onAddCategory, setIsFormVisible }: FormProps) => {
   const {
     register,
     handleSubmit,
@@ -18,6 +19,9 @@ const Form = ({ onAddCategory }: FormProps) => {
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
     onAddCategory(data.category);
+    if (setIsFormVisible) {
+      setIsFormVisible(false);
+    }
     reset();
   };
 
@@ -28,7 +32,9 @@ const Form = ({ onAddCategory }: FormProps) => {
         autoComplete="off"
         {...register('category', { required: true })}
       />
-      <button type="submit" className={classes.btn}>Add category</button>
+      <button type="submit" className={classes.btn}>
+        Add category
+      </button>
       {errors.category && (
         <span className={classes.error}>this field is required</span>
       )}

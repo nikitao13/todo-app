@@ -29,6 +29,12 @@ public class TaskService {
         newTask.setTaskName(taskRequest.getTaskName());
         newTask.setCompleted(Boolean.TRUE.equals(taskRequest.getCompleted()));
         newTask.setCategory(category);
+
+        String priority = taskRequest.getPriority();
+        if (priority == null) {
+            priority = "LOW";
+        }
+        newTask.setPriority(priority.toUpperCase());
     
         return taskRepository.save(newTask);
     }
@@ -38,18 +44,27 @@ public class TaskService {
         if (existingTask == null) {
             return null;
         }
-
-        Category category = null;
-        if (taskRequest.getCategoryId() != null) {
-            category = categoryService.getCategoryById(taskRequest.getCategoryId());
+    
+        if (taskRequest.getTaskName() != null) {
+            existingTask.setTaskName(taskRequest.getTaskName());
         }
-
-        existingTask.setTaskName(taskRequest.getTaskName());
-        existingTask.setCompleted(Boolean.TRUE.equals(taskRequest.getCompleted()));
-        existingTask.setCategory(category);
-
+    
+        if (taskRequest.getCompleted() != null) {
+            existingTask.setCompleted(Boolean.TRUE.equals(taskRequest.getCompleted()));
+        }
+    
+        if (taskRequest.getCategoryId() != null) {
+            Category category = categoryService.getCategoryById(taskRequest.getCategoryId());
+            existingTask.setCategory(category);
+        }
+    
+        if (taskRequest.getPriority() != null) {
+            existingTask.setPriority(taskRequest.getPriority().toUpperCase());
+        }
+    
         return taskRepository.save(existingTask);
     }
+    
 
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);

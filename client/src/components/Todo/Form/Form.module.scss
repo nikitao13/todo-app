@@ -2,7 +2,7 @@
   font-size: 0.85rem;
   display: flex;
   gap: 0.25rem;
-  width: 30%;
+  width: 50%;
   justify-content: center;
 
   input {
@@ -23,7 +23,8 @@
     color: white;
     border: 1px solid rgba(219, 219, 219, 0.8);
     user-select: none;
-    width: 35%;
+    width: 20%;
+    cursor: pointer;
   }
 
   button {
@@ -34,7 +35,7 @@
     border: 1px solid rgba(219, 219, 219, 0.8);
     cursor: pointer;
     user-select: none;
-    width: 15%;
+    width: 10%;
     display: flex;
     justify-content: center;
   }

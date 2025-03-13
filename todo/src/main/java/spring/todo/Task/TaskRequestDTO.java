@@ -4,6 +4,7 @@ public class TaskRequestDTO {
     private String taskName;
     private Boolean completed;
     private Long categoryId;
+    private String priority;
 
     public TaskRequestDTO() {}
 
@@ -29,5 +30,13 @@ public class TaskRequestDTO {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 }

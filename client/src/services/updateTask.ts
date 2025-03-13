@@ -5,6 +5,7 @@ interface UpdateTaskParams {
   taskId: number;
   taskName?: string;
   completed?: boolean;
+  priority?: string;
   categoryId?: number;
 }
 
@@ -12,11 +13,13 @@ export const updateTask = async ({
   taskId,
   taskName,
   completed,
+  priority,
   categoryId,
 }: UpdateTaskParams): Promise<Task> => {
   const body = {
     taskName,
     completed,
+    priority,
     categoryId,
   };
 

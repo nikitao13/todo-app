@@ -3,7 +3,7 @@ import { useModal } from '../../hooks/useModal';
 import { updateTask } from '../../services/updateTask';
 import { Category } from '../../types/types';
 import Form from '../Todo/Form/Form';
-import { RxCross2 } from "react-icons/rx";
+import { RxCross2 } from 'react-icons/rx';
 
 interface ModalProps {
   categories: Category[];
@@ -18,10 +18,11 @@ const Modal = ({ categories, refreshTasks }: ModalProps) => {
   const handleUpdateTask = async (
     taskId: number,
     taskName: string,
-    categoryId: number
+    categoryId: number,
+    priority: string
   ) => {
     try {
-      await updateTask({ taskId, taskName, categoryId });
+      await updateTask({ taskId, taskName, categoryId, priority });
       refreshTasks();
       closeModal();
     } catch (error) {
@@ -34,7 +35,7 @@ const Modal = ({ categories, refreshTasks }: ModalProps) => {
       <div className={classes.container}>
         <div className={classes.modalContent}>
           <h2>{selectedTask ? 'Edit Task' : 'Add Task'}</h2>
-          <RxCross2 onClick={closeModal} className={classes.icon}/>
+          <RxCross2 onClick={closeModal} className={classes.icon} />
         </div>
 
         <div className={classes.formWrapper}>

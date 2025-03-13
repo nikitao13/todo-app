@@ -12,7 +12,7 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const { tasks, toggleTaskCompleted, addTask, handleDeleteTask, getTasks } =
     useTasks();
 
@@ -30,7 +30,11 @@ function App() {
       <Modal categories={categories} refreshTasks={getTasks} />
       <AppWrapper>
         <Header />
-        <Categories categories={categories} setCategories={setCategories} setSelectedCategory={setSelectedCategory} />
+        <Categories
+          categories={categories}
+          setCategories={setCategories}
+          setSelectedCategory={setSelectedCategory}
+        />
         <List
           tasks={tasks}
           categories={categories}

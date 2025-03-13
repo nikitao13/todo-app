@@ -6,16 +6,29 @@ import { Category, Task } from '../../../types/types';
 interface FormData {
   task: string;
   categoryId: number;
+  priority: string;
 }
 
 interface FormProps {
   categories: Category[];
-  addTask?: (taskName: string, categoryId: number) => void;
-  updateTask?: (taskId: number, taskName: string, categoryId: number) => void;
+  addTask?: (taskName: string, categoryId: number, priority: string) => void;
+  updateTask?: (
+    taskId: number,
+    taskName: string,
+    categoryId: number,
+    priority: string
+  ) => void;
   taskToEdit?: Task | null;
+  setIsFormVisible?: (isVisible: boolean) => void;
 }
 
-const Form = ({ categories, addTask, updateTask, taskToEdit }: FormProps) => {
+const Form = ({
+  categories,
+  addTask,
+  updateTask,
+  taskToEdit,
+  setIsFormVisible,
+}: FormProps) => {
   const {
     register,
     handleSubmit,
@@ -28,17 +41,26 @@ const Form = ({ categories, addTask, updateTask, taskToEdit }: FormProps) => {
     if (!taskToEdit) return;
     setValue('task', taskToEdit.taskName);
     setValue('categoryId', taskToEdit.category.id);
+    setValue('priority', taskToEdit.priority);
   }, [taskToEdit, setValue]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log('Form data:', data);
 
     if (taskToEdit && updateTask) {
-      updateTask(taskToEdit.taskId, data.task, data.categoryId);
+      updateTask(
+        taskToEdit.taskId,
+        data.task,
+        data.categoryId,
+        data.priority.toUpperCase()
+      );
     } else if (addTask) {
-      addTask(data.task, data.categoryId);
+      addTask(data.task, data.categoryId, data.priority.toUpperCase());
     }
 
+    if (setIsFormVisible) {
+      setIsFormVisible(false);
+    }
     reset();
   };
 
@@ -58,7 +80,7 @@ const Form = ({ categories, addTask, updateTask, taskToEdit }: FormProps) => {
         {...register('categoryId', { required: true, valueAsNumber: true })}
       >
         <option value="" disabled>
-          Select a category
+          Category
         </option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
@@ -66,11 +88,22 @@ const Form = ({ categories, addTask, updateTask, taskToEdit }: FormProps) => {
           </option>
         ))}
       </select>
+
+      <select defaultValue="" {...register('priority', { required: true })}>
+        <option value="" disabled>
+          Priority
+        </option>
+        <option value="LOW">Low</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HIGH">High</option>
+      </select>
       {errors.categoryId && (
         <span className={classes.error}>Category is required</span>
       )}
 
-      <button type="submit" className={classes.btn}>{taskToEdit ? 'Update Task' : 'Add Task'}</button>
+      <button type="submit" className={classes.btn}>
+        {taskToEdit ? 'Update Task' : 'Add Task'}
+      </button>
     </form>
   );
 };

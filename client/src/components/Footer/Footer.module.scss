@@ -15,10 +15,14 @@
 
   .icon {
     cursor: pointer;
-    transition: opacity 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 
     &:hover {
-      opacity: 0.8;
+      color: #3dc6f1;
     }
+  }
+
+  .github {
+    color: white;
   }
 }

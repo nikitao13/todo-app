@@ -21,24 +21,31 @@ public class Task {
 
   private Boolean completed;
 
+  @Column(nullable = false)
+  private String priority;
+
   @ManyToOne
   @JoinColumn(name = "category_id")
   @JsonIgnoreProperties("tasks") 
   private Category category;
 
+
   public Task() {}
 
-  public Task(String taskName, boolean completed) {
+  public Task(String taskName, boolean completed, String priority) {
     this.taskName = taskName;
     this.completed = completed;
+    this.priority = priority;
   }
 
   public Long getTaskId() { return taskId; }
   public String getTaskName() { return taskName; }
   public boolean isCompleted() { return completed; }
   public Category getCategory() { return category; }
+  public String getPriority() { return priority; }
 
   public void setTaskName(String taskName) { this.taskName = taskName; }
   public void setCompleted(boolean completed) { this.completed = completed; }
   public void setCategory(Category category) { this.category = category; }
+  public void setPriority(String priority) { this.priority = priority; }
 }

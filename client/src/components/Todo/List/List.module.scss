@@ -1,19 +1,20 @@
 ul {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+ 
   gap: 1.5rem;
   list-style: none;
   letter-spacing: 0.02rem;
   padding: 0;
-  width: 30%;
+  width: 50%;
 }
 
 .categoryTitle {
-  margin: 0;
+  margin: 0 auto;
   font-size: 1.25rem;
   user-select: none;
-  font-weight: semi-bold;
+  align-self: flex-start;
+  width: 50%;
 }
 
 .title {
@@ -37,7 +38,7 @@ ul {
 .todoHeader {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 50%;
   margin-bottom: 1rem;
   user-select: none;
   

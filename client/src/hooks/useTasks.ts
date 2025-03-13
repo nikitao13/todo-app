@@ -43,12 +43,17 @@ export const useTasks = () => {
     }
   };
 
-  const addTask = async (taskName: string, categoryId: number) => {
+  const addTask = async (
+    taskName: string,
+    categoryId: number,
+    priority: string
+  ) => {
     try {
       const newTask = await createTask({
         taskName,
         completed: false,
         categoryId,
+        priority: priority.toUpperCase(),
       });
       setTasks((prev) => [...prev, newTask]);
     } catch (error) {

@@ -24,6 +24,13 @@ const Item = ({ task, toggleTaskCompleted, handleDeleteTask }: ItemProps) => {
         </p>
       </div>
       <div className={classes.btnContainer}>
+        <p
+          className={`${classes.priority} ${
+            task.priority === 'HIGH' ? classes.highPriority : ''
+          }`}
+        >
+          {task.priority} PRIORITY
+        </p>
         <button className={classes.categoryLabel}>{task.category.name}</button>
         <button className={classes.edit} onClick={() => openModal(task)}>
           Edit

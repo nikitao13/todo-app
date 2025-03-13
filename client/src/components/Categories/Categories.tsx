@@ -3,6 +3,8 @@ import classes from './Categories.module.scss';
 import { Category } from '../../types/types';
 import { createCategory } from '../../services/createCategory';
 import CategoryItem from './Item/Item';
+import { FaPlus } from 'react-icons/fa';
+import { useState } from 'react';
 interface CategoriesProps {
   categories: Category[];
   setCategories: (update: (prev: Category[]) => Category[]) => void;
@@ -14,6 +16,7 @@ const Categories = ({
   setCategories,
   setSelectedCategory,
 }: CategoriesProps) => {
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const handleAddCategory = async (categoryName: string) => {
     try {
       const newCategory = await createCategory(categoryName);
@@ -26,7 +29,10 @@ const Categories = ({
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Task Categories</h1>
+      <div className={classes.categoryHeader}>
+        <h1 className={classes.title}>Task Categories</h1>
+        <FaPlus className={classes.icon} onClick={() => setIsFormVisible((prev) => !prev)} size={12} />
+      </div>
       <div className={classes.categories}>
         <div
           className={classes.showAll}
@@ -35,11 +41,15 @@ const Categories = ({
           <p>Show All</p>
         </div>
         {categories.map((category) => (
-          <CategoryItem key={category.id} category={category} setSelectedCategory={setSelectedCategory} />
+          <CategoryItem
+            key={category.id}
+            category={category}
+            setSelectedCategory={setSelectedCategory}
+          />
         ))}
       </div>
 
-      <Form onAddCategory={handleAddCategory} />
+      {isFormVisible && <Form onAddCategory={handleAddCategory} setIsFormVisible={setIsFormVisible}/>}
     </div>
   );
 };
