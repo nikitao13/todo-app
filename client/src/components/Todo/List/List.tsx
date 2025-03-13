@@ -33,6 +33,7 @@ const List = ({
 }: ListProps) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const filteredTasks = filterTasksByCategory(tasks, selectedCategory);
+  const completedTasks = tasks.filter((task) => task.completed);
 
   return (
     <div className={classes.container}>
@@ -89,6 +90,22 @@ const List = ({
             />
           ))}
       </ul>
+
+      {completedTasks.length === 0 && (
+        <p>Every big achievement starts with the first step!</p>
+      )}
+
+      {completedTasks.length > 0 && (
+        <p>
+          You have completed {completedTasks.length}/{tasks.length} tasks! ⭐
+        </p>
+      )}
+
+      {completedTasks.length === tasks.length && (
+        <p className={classes.congrats}>
+          Well done! You have completed all your tasks.
+        </p>
+      )}
     </div>
   );
 };

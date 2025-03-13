@@ -19,7 +19,7 @@ const Item = ({ task, toggleTaskCompleted, handleDeleteTask }: ItemProps) => {
           checked={task.completed}
           onChange={() => toggleTaskCompleted(task.taskId)}
         />
-        <p className={task.completed ? classes.completed : ''}>
+        <p className={task.completed ? classes.completed : classes.taskName}>
           {task.taskName}
         </p>
       </div>

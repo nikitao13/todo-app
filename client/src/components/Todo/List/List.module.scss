@@ -1,7 +1,7 @@
 ul {
   display: flex;
   flex-direction: column;
- 
+
   gap: 1.5rem;
   list-style: none;
   letter-spacing: 0.02rem;
@@ -41,8 +41,9 @@ ul {
   width: 50%;
   margin-bottom: 1rem;
   user-select: none;
-  
-  h1, .icon {
+
+  h1,
+  .icon {
     margin: 0;
   }
 
@@ -54,4 +55,8 @@ ul {
       color: #3dc6f1;
     }
   }
+}
+
+.congrats {
+  margin: 0;
 }

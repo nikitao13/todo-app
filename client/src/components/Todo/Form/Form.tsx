@@ -93,9 +93,9 @@ const Form = ({
         <option value="" disabled>
           Priority
         </option>
-        <option value="LOW">Low</option>
-        <option value="MEDIUM">Medium</option>
         <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
       </select>
       {errors.categoryId && (
         <span className={classes.error}>Category is required</span>
