@@ -2,17 +2,18 @@ import Form from './Form/Form';
 import classes from './Categories.module.scss';
 import { Category } from '../../types/types';
 import { createCategory } from '../../services/createCategory';
-
+import CategoryItem from './Item/Item';
 interface CategoriesProps {
   categories: Category[];
   setCategories: (update: (prev: Category[]) => Category[]) => void;
+  setSelectedCategory: (category: string) => void;
 }
 
-const Categories = ({ categories, setCategories }: CategoriesProps) => {
-  const categoriesString = categories
-    .map((category) => category.name)
-    .join(', ');
-
+const Categories = ({
+  categories,
+  setCategories,
+  setSelectedCategory,
+}: CategoriesProps) => {
   const handleAddCategory = async (categoryName: string) => {
     try {
       const newCategory = await createCategory(categoryName);
@@ -27,7 +28,15 @@ const Categories = ({ categories, setCategories }: CategoriesProps) => {
     <div className={classes.container}>
       <h1 className={classes.title}>Task Categories</h1>
       <div className={classes.categories}>
-        <p className={classes.categoriesString}>{categoriesString}</p>
+        <div
+          className={classes.showAll}
+          onClick={() => setSelectedCategory('all')}
+        >
+          <p>Show All</p>
+        </div>
+        {categories.map((category) => (
+          <CategoryItem key={category.id} category={category} setSelectedCategory={setSelectedCategory} />
+        ))}
       </div>
 
       <Form onAddCategory={handleAddCategory} />

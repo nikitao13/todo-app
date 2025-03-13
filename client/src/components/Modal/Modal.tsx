@@ -3,6 +3,7 @@ import { useModal } from '../../hooks/useModal';
 import { updateTask } from '../../services/updateTask';
 import { Category } from '../../types/types';
 import Form from '../Todo/Form/Form';
+import { RxCross2 } from "react-icons/rx";
 
 interface ModalProps {
   categories: Category[];
@@ -30,17 +31,19 @@ const Modal = ({ categories, refreshTasks }: ModalProps) => {
 
   return (
     <div className={classes.overlay}>
-      <div className={classes.modalContent}>
-        <h2>{selectedTask ? 'Edit Task' : 'Add Task'}</h2>
-        <button onClick={closeModal}>x</button>
-      </div>
+      <div className={classes.container}>
+        <div className={classes.modalContent}>
+          <h2>{selectedTask ? 'Edit Task' : 'Add Task'}</h2>
+          <RxCross2 onClick={closeModal} className={classes.icon}/>
+        </div>
 
-      <div className={classes.formWrapper}>
-        <Form
-          categories={categories}
-          updateTask={handleUpdateTask}
-          taskToEdit={selectedTask}
-        />
+        <div className={classes.formWrapper}>
+          <Form
+            categories={categories}
+            updateTask={handleUpdateTask}
+            taskToEdit={selectedTask}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,17 +1,32 @@
 .container {
   display: flex;
-  gap: 0.25rem;
-  align-items: stretch;
+  gap: 1rem;
   height: 1.5rem;
+  border-bottom: 1px solid grey;
+  padding-bottom: 0.5rem;
+  justify-content: space-between;
+
+  &:hover {
+    p {
+      color: #3dc6f1;
+    }
+  }
 
   input {
-    height: 100%;
     width: 0.95rem;
+    cursor: pointer;
   }
 
   p {
     margin: 0;
-    align-self: center;
+    transition: color 0.2s ease-in-out;
+    user-select: none;
+  }
+
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.8;
+    color: #3dc6f1;
   }
 
   button {
@@ -38,7 +53,7 @@
   .edit {
     transition: all 0.2s ease-in-out;
     &:hover {
-      color: #3DC6F1;
+      color: #3dc6f1;
     }
   }
 
@@ -55,7 +70,18 @@
     transition: color 0.2s ease-in-out;
     margin-right: 0.25rem;
     margin-left: 0.25rem;
-    color: #3DC6F1;
+    color: #3dc6f1;
     user-select: none;
+  }
+
+  .btnContainer {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .checkNameContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 }

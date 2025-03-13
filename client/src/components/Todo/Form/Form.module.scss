@@ -2,12 +2,13 @@
   font-size: 0.85rem;
   display: flex;
   gap: 0.25rem;
-  margin-bottom: 1.25rem;
+  width: 30%;
+  justify-content: center;
 
   input {
     all: unset;
     padding: 0.25rem 0.5rem;
-    width: 40%;
+    width: 50%;
     border-radius: 0.25rem;
     outline: none;
     background-color: #161618;
@@ -22,6 +23,7 @@
     color: white;
     border: 1px solid rgba(219, 219, 219, 0.8);
     user-select: none;
+    width: 35%;
   }
 
   button {
@@ -32,6 +34,9 @@
     border: 1px solid rgba(219, 219, 219, 0.8);
     cursor: pointer;
     user-select: none;
+    width: 15%;
+    display: flex;
+    justify-content: center;
   }
 
   .error {
@@ -43,5 +48,12 @@
     border-radius: 0.25rem;
     font-size: 12px;
     opacity: 0.9;
+  }
+
+  .btn {
+    transition: opacity 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

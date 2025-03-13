@@ -1,32 +1,10 @@
-.title {
-  margin: 0;
-  font-size: 1.5rem;
-  user-select: none;
-}
-
-.categories {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  width: 50%;
-  justify-content: center;
-}
-
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-.showAll {
   border-radius: 0.25rem;
   background-color: #161618;
   border: 0.5px solid rgba(219, 219, 219, 0.8);
   padding: 0.25rem 0.5rem;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     opacity: 0.9;

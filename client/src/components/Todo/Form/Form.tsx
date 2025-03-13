@@ -70,7 +70,7 @@ const Form = ({ categories, addTask, updateTask, taskToEdit }: FormProps) => {
         <span className={classes.error}>Category is required</span>
       )}
 
-      <button type="submit">{taskToEdit ? 'Update Task' : 'Add Task'}</button>
+      <button type="submit" className={classes.btn}>{taskToEdit ? 'Update Task' : 'Add Task'}</button>
     </form>
   );
 };

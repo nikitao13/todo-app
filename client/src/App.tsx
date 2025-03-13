@@ -7,9 +7,12 @@ import Categories from './components/Categories/Categories';
 import { Category } from './types/types';
 import { ModalProvider } from './providers/ModalProvider';
 import Modal from './components/Modal/Modal';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const { tasks, toggleTaskCompleted, addTask, handleDeleteTask, getTasks } =
     useTasks();
 
@@ -26,14 +29,17 @@ function App() {
     <ModalProvider>
       <Modal categories={categories} refreshTasks={getTasks} />
       <AppWrapper>
-        <Categories categories={categories} setCategories={setCategories} />
+        <Header />
+        <Categories categories={categories} setCategories={setCategories} setSelectedCategory={setSelectedCategory} />
         <List
           tasks={tasks}
           categories={categories}
           toggleTaskCompleted={toggleTaskCompleted}
           addTask={addTask}
           handleDeleteTask={handleDeleteTask}
+          selectedCategory={selectedCategory}
         />
+        <Footer />
       </AppWrapper>
     </ModalProvider>
   );

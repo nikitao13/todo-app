@@ -13,22 +13,28 @@ const Item = ({ task, toggleTaskCompleted, handleDeleteTask }: ItemProps) => {
 
   return (
     <div className={classes.container}>
-      <p>{task.taskName}</p>
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => toggleTaskCompleted(task.taskId)}
-      />
-      <button className={classes.categoryLabel}>{task.category.name}</button>
-      <button className={classes.edit} onClick={() => openModal(task)}>
-        Edit
-      </button>
-      <button
-        onClick={() => handleDeleteTask(task.taskId)}
-        className={classes.delete}
-      >
-        Delete
-      </button>
+      <div className={classes.checkNameContainer}>
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => toggleTaskCompleted(task.taskId)}
+        />
+        <p className={task.completed ? classes.completed : ''}>
+          {task.taskName}
+        </p>
+      </div>
+      <div className={classes.btnContainer}>
+        <button className={classes.categoryLabel}>{task.category.name}</button>
+        <button className={classes.edit} onClick={() => openModal(task)}>
+          Edit
+        </button>
+        <button
+          onClick={() => handleDeleteTask(task.taskId)}
+          className={classes.delete}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

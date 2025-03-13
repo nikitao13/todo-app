@@ -28,7 +28,7 @@ const Form = ({ onAddCategory }: FormProps) => {
         autoComplete="off"
         {...register('category', { required: true })}
       />
-      <button type="submit">Add category</button>
+      <button type="submit" className={classes.btn}>Add category</button>
       {errors.category && (
         <span className={classes.error}>this field is required</span>
       )}

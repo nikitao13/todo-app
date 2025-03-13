@@ -1,11 +1,10 @@
 .container {
   width: 80%;
   height: 100vh;
-  background-color: rgba(24, 24, 24, 0.8);
+  background-color: rgba(24, 24, 24, 1);
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
-  justify-self: center;
-  padding: 1.5rem;
   gap: 3rem;
   box-sizing: border-box;
   color: #dbdbdb;
