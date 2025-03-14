@@ -13,7 +13,7 @@ interface ListProps {
     taskName: string,
     categoryId: number,
     priority: string
-  ) => Promise<void>;
+  ) => Promise<string | null>;
   handleDeleteTask: (taskId: number) => void;
   selectedCategory: string;
 }
@@ -91,7 +91,7 @@ const List = ({
           ))}
       </ul>
 
-      {completedTasks.length === 0 && (
+      {completedTasks.length === 0 && tasks.length > 0 && (
         <p>Every big achievement starts with the first step!</p>
       )}
 
@@ -101,7 +101,7 @@ const List = ({
         </p>
       )}
 
-      {completedTasks.length === tasks.length && (
+      {completedTasks.length > 0 && completedTasks.length === tasks.length && (
         <p className={classes.congrats}>
           Well done! You have completed all your tasks.
         </p>

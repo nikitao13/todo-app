@@ -17,21 +17,29 @@ const Categories = ({
   setSelectedCategory,
 }: CategoriesProps) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const handleAddCategory = async (categoryName: string) => {
-    try {
-      const newCategory = await createCategory(categoryName);
 
-      setCategories((prev) => [...prev, newCategory]);
-    } catch (error) {
-      console.error('Error adding new category:', error);
+  const handleAddCategory = async (
+    categoryName: string
+  ): Promise<string | null> => {
+    const response = await createCategory(categoryName);
+
+    if (typeof response === 'string') {
+      return response;
     }
+    
+    setCategories((prev) => [...prev, response]);
+    return null;
   };
 
   return (
     <div className={classes.container}>
       <div className={classes.categoryHeader}>
         <h1 className={classes.title}>Task Categories</h1>
-        <FaPlus className={classes.icon} onClick={() => setIsFormVisible((prev) => !prev)} size={12} />
+        <FaPlus
+          className={classes.icon}
+          onClick={() => setIsFormVisible((prev) => !prev)}
+          size={12}
+        />
       </div>
       <div className={classes.categories}>
         <div
@@ -49,7 +57,12 @@ const Categories = ({
         ))}
       </div>
 
-      {isFormVisible && <Form onAddCategory={handleAddCategory} setIsFormVisible={setIsFormVisible}/>}
+      {isFormVisible && (
+        <Form
+          onAddCategory={handleAddCategory}
+          setIsFormVisible={setIsFormVisible}
+        />
+      )}
     </div>
   );
 };

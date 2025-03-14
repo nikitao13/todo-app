@@ -1,7 +1,9 @@
 import { Category } from '../types/types';
 import { endpoint } from './endpoint';
 
-export const createCategory = async (name: string): Promise<Category> => {
+export const createCategory = async (
+  name: string
+): Promise<string | Category> => {
   try {
     const response = await fetch(`${endpoint}/categories`, {
       method: 'POST',
@@ -10,13 +12,13 @@ export const createCategory = async (name: string): Promise<Category> => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create category');
+      const errorData = await response.json();
+      return errorData.error || 'Failed to create category';
     }
 
-    const newCategory: Category = await response.json();
-    return newCategory;
+    return await response.json();
   } catch (error) {
     console.error('Error creating category:', error);
-    throw error;
+    return 'An unexpected error occurred.';
   }
 };

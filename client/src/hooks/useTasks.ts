@@ -26,7 +26,6 @@ export const useTasks = () => {
     if (!currentTask) return;
 
     const updatedCompleted = !currentTask.completed;
-
     try {
       const updated = await updateTask({
         taskId,
@@ -47,7 +46,7 @@ export const useTasks = () => {
     taskName: string,
     categoryId: number,
     priority: string
-  ) => {
+  ): Promise<string | null> => {
     try {
       const newTask = await createTask({
         taskName,
@@ -55,9 +54,15 @@ export const useTasks = () => {
         categoryId,
         priority: priority.toUpperCase(),
       });
+
       setTasks((prev) => [...prev, newTask]);
+      return null;
     } catch (error) {
       console.error('Error creating task:', error);
+
+      return error instanceof Error
+        ? error.message
+        : 'An unexpected error occurred.';
     }
   };
 

@@ -16,23 +16,23 @@ export const updateTask = async ({
   priority,
   categoryId,
 }: UpdateTaskParams): Promise<Task> => {
-  const body = {
-    taskName,
-    completed,
-    priority,
-    categoryId,
-  };
+  const body = { taskName, completed, priority, categoryId };
 
-  const response = await fetch(`${endpoint}/tasks/${taskId}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  try {
+    const response = await fetch(`${endpoint}/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
-  if (!response.ok) {
-    throw new Error('Failed to update task');
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update task');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating task:', error);
+    throw error;
   }
-
-  const updatedTask: Task = await response.json();
-  return updatedTask;
 };

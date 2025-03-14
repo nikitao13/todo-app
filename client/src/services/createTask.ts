@@ -16,11 +16,13 @@ export const createTask = async (task: CreateTaskParams) => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create task');
+      const errorData = await response.json();
+      throw new Error(
+        errorData.error || 'An error occurred while creating the task.'
+      );
     }
 
-    const savedTask = await response.json();
-    return savedTask;
+    return await response.json();
   } catch (error) {
     console.error('Error creating task:', error);
     throw error;

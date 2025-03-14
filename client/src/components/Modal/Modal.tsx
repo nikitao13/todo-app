@@ -20,13 +20,17 @@ const Modal = ({ categories, refreshTasks }: ModalProps) => {
     taskName: string,
     categoryId: number,
     priority: string
-  ) => {
+  ): Promise<string | null> => {
     try {
       await updateTask({ taskId, taskName, categoryId, priority });
       refreshTasks();
       closeModal();
+      return null;
     } catch (error) {
       console.error('Error updating task:', error);
+      return error instanceof Error
+        ? error.message
+        : 'An unexpected error occurred.';
     }
   };
 
