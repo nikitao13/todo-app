@@ -27,16 +27,16 @@ public class TaskSeeder implements CommandLineRunner {
 
         categoryRepository.saveAll(Arrays.asList(backendCategory, frontendCategory, fullStackCategory, homeworkCategory));
 
-        Task task1 = new Task("Setup API routes", true, "HIGH");
+        Task task1 = new Task("setup API routes", true, "HIGH");
         task1.setCategory(backendCategory);
 
-        Task task2 = new Task("Create frontend", false, "HIGH");
+        Task task2 = new Task("create frontend", false, "HIGH");
         task2.setCategory(frontendCategory);
 
-        Task task3 = new Task("Connect frontend to backend", false, "MEDIUM");
+        Task task3 = new Task("connect frontend to backend", false, "MEDIUM");
         task3.setCategory(fullStackCategory);
 
-        Task task4 = new Task("Codewars", false, "LOW");
+        Task task4 = new Task("codewars", false, "LOW");
         task4.setCategory(homeworkCategory);
 
         taskRepository.saveAll(Arrays.asList(task1, task2, task3, task4));

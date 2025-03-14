@@ -30,7 +30,7 @@ public class Category {
     }
 
     public String getName() {
-        return name;
+        return capitalizeFirstLetter(name); 
     }
 
     public void setName(String name) {
@@ -43,5 +43,12 @@ public class Category {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    private String capitalizeFirstLetter(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+        return Character.toUpperCase(text.charAt(0)) + text.substring(1);
     }
 }

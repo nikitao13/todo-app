@@ -6,6 +6,9 @@ import spring.todo.Category.Category;
 import spring.todo.Category.CategoryService;
 import java.util.List;
 
+import spring.todo.exceptions.DuplicateTaskException;
+import spring.todo.exceptions.ResourceNotFoundException;
+
 @Service
 public class TaskService {
     @Autowired
@@ -19,32 +22,34 @@ public class TaskService {
     }
 
     public Task getTaskById(Long id) {
-        return taskRepository.findById(id).orElse(null);
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + id));
     }
 
     public Task createTask(TaskRequestDTO taskRequest) {
+        if (taskRepository.existsByTaskNameIgnoreCase(taskRequest.getTaskName())) {
+            throw new DuplicateTaskException("Task name '" + taskRequest.getTaskName() + "' already exists.");
+        }
+
         Category category = categoryService.getCategoryById(taskRequest.getCategoryId());
     
         Task newTask = new Task();
         newTask.setTaskName(taskRequest.getTaskName());
         newTask.setCompleted(Boolean.TRUE.equals(taskRequest.getCompleted()));
         newTask.setCategory(category);
+        newTask.setPriority(taskRequest.getPriority() != null ? taskRequest.getPriority().toUpperCase() : "LOW");
 
-        String priority = taskRequest.getPriority();
-        if (priority == null) {
-            priority = "LOW";
-        }
-        newTask.setPriority(priority.toUpperCase());
-    
         return taskRepository.save(newTask);
     }
 
     public Task updateTask(Long id, TaskRequestDTO taskRequest) {
-        Task existingTask = taskRepository.findById(id).orElse(null);
-        if (existingTask == null) {
-            return null;
+        Task existingTask = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + id));
+        
+        if (taskRequest.getTaskName() != null && !taskRequest.getTaskName().equals(existingTask.getTaskName())) {
+            if (taskRepository.existsByTaskNameIgnoreCase(taskRequest.getTaskName())) {
+                throw new DuplicateTaskException("Task name '" + taskRequest.getTaskName() + "' already exists.");
+            }
         }
-    
+        
         if (taskRequest.getTaskName() != null) {
             existingTask.setTaskName(taskRequest.getTaskName());
         }
@@ -67,6 +72,9 @@ public class TaskService {
     
 
     public void deleteTask(Long id) {
+        if (!taskRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Task with ID " + id + " not found.");
+        }
         taskRepository.deleteById(id);
     }
 }
